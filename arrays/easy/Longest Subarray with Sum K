@@ -1,0 +1,75 @@
+---------------QUESTION--------------------
+Given an array arr[] containing integers and an integer k, your task is to find the length of the longest subarray where the sum of its elements is equal to the given value k. If there is no subarray with sum equal to k, return 0.
+
+Examples:
+
+Input: arr[] = [10, 5, 2, 7, 1, -10], k = 15
+Output: 6
+Explanation: Subarrays with sum = 15 are [5, 2, 7, 1], [10, 5] and [10, 5, 2, 7, 1, -10]. The length of the longest subarray with a sum of 15 is 6.
+Input: arr[] = [-5, 8, -14, 2, 4, 12], k = -5
+Output: 5
+Explanation: Subarrays with sum = -5 are [-5] and [-5, 8, -14, 2, 4]. The length of the longest subarray with a sum of -5 is 5.
+Input: arr[] = [10, -10, 20, 30], k = 5
+Output: 0
+Explanation: No subarray with sum = 5 is present in arr[].
+
+———————LINK———————————
+https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1
+
+-----------ALGO WITH Example-------------
+Algorithm: Longest Subarray with Sum = k (Using Prefix Sum + HashMap)
+
+Idea:
+Use a running prefix sum. 
+If (current_sum - k) has appeared before, then the subarray between those indices has sum = k.
+
+Steps:
+1. Create a dictionary d to store prefix_sum → first index where it appeared.
+2. Initialize:
+      su = 0      (running sum)
+      ml = 0      (maximum length)
+
+3. Traverse the array:
+      su = su + arr[i]
+
+4. If su == k:
+      update ml = max(ml, i + 1)
+
+5. Compute x = su - k
+
+6. If x exists in dictionary:
+      length = i - d[x]
+      update ml = max(ml, length)
+
+7. If su is not already in dictionary:
+      store d[su] = i  (store first occurrence only)
+
+8. After traversal return ml.
+
+
+Example:
+
+arr = [10, 5, 2, 7, 1, 9]
+k = 15
+
+
+Step-by-step table:
+
+Index | arr[i] | Running Sum (su) | su-k | In Map? | Length Found | Max Length | Map After Step
+-----------------------------------------------------------------------------------------------
+0     | 10     | 10               | -5   | No      | -            | 0          | {10:0}
+1     | 5      | 15               | 0    | No      | -            | 2          | {10:0,15:1}
+2     | 2      | 17               | 2    | No      | -            | 2          | {10:0,15:1,17:2}
+3     | 7      | 24               | 9    | No      | -            | 2          | {10:0,15:1,17:2,24:3}
+4     | 1      | 25               | 10   | Yes     | 4 (4-0)      | 4          | {10:0,15:1,17:2,24:3,25:4}
+5     | 9      | 34               | 19   | No      | -            | 4          | {10:0,15:1,17:2,24:3,25:4,34:5}
+
+
+Longest Subarray with Sum = 15:
+[5, 2, 7, 1]
+
+Length = 4
+
+
+Time Complexity: O(n)
+Space Complexity: O(n)
