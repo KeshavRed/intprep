@@ -1,0 +1,140 @@
+---------------QUESTION--------------------
+Given two sorted arrays a[] and b[], where each array may contain duplicate elements , the task is to return the elements in the union of the two arrays in sorted order.
+Union of two arrays can be defined as the set containing distinct common elements that are present in either of the arrays.
+
+Examples:
+
+Input: a[] = [1, 2, 3, 4, 5], b[] = [1, 2, 3, 6, 7]
+Output: [1, 2, 3, 4, 5, 6, 7]
+Explanation: Distinct elements including both the arrays are: 1 2 3 4 5 6 7.
+Input: a[] = [2, 2, 3, 4, 5], b[] = [1, 1, 2, 3, 4]
+Output: [1, 2, 3, 4, 5]
+Explanation: Distinct elements including both the arrays are: 1 2 3 4 5.
+Input: a[] = [1, 1, 1, 1, 1], b[] = [2, 2, 2, 2, 2]
+Output: [1, 2]
+Explanation: Distinct elements including both the arrays are: 1 2.
+
+
+------LINK----------
+
+https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/0
+
+-----------ALGO WITH Example-------------
+
+Algorithm: Union of Two Sorted Arrays (without duplicates)
+
+Idea:
+Use two pointers to traverse both sorted arrays simultaneously. 
+Always add the smaller element to the result while avoiding duplicates.
+
+Steps:
+1. Initialize:
+   fin = [] (result array)
+   p1 = 0 (pointer for array a)
+   p2 = 0 (pointer for array b)
+
+2. Traverse both arrays while p1 < len(a) and p2 < len(b):
+
+   a) If a[p1] == b[p2]:
+        - If fin is empty OR last element in fin != a[p1], append a[p1]
+        - Move both pointers (p1++, p2++)
+
+   b) If a[p1] > b[p2]:
+        - If fin is empty OR last element in fin != b[p2], append b[p2]
+        - Move pointer p2++
+
+   c) Else (a[p1] < b[p2]):
+        - If fin is empty OR last element in fin != a[p1], append a[p1]
+        - Move pointer p1++
+
+3. If elements remain in array a:
+        Add remaining elements to fin while avoiding duplicates.
+
+4. If elements remain in array b:
+        Add remaining elements to fin while avoiding duplicates.
+
+5. Return fin.
+
+
+Example:
+
+a = [1,2,2,3,5]
+b = [2,3,4,6]
+
+Step-by-step:
+
+p1=0, p2=0
+a[p1]=1 , b[p2]=2
+1 < 2 → add 1
+fin = [1]
+
+p1=1, p2=0
+2 == 2 → add 2
+fin = [1,2]
+
+p1=2, p2=1
+2 < 3 but duplicate → skip
+fin = [1,2]
+
+p1=3, p2=1
+3 == 3 → add 3
+fin = [1,2,3]
+
+p1=4, p2=2
+5 > 4 → add 4
+fin = [1,2,3,4]
+
+p1=4, p2=3
+5 < 6 → add 5
+fin = [1,2,3,4,5]
+
+Remaining element in b:
+add 6
+
+Final Result:
+fin = [1,2,3,4,5,6]
+
+
+Time Complexity: O(n + m)
+Space Complexity: O(n + m)
+
+
+-----------------------------CODE--------------
+
+class Solution:
+    def findUnion(self, a, b):
+        # code here 
+        fin=[]
+        p1=0
+        p2=0
+        lena=len(a)
+        lenb=(len(b))
+        while p1<lena and p2<lenb:
+            if a[p1]==b[p2]:
+                if len(fin)==0 or fin[-1]!=a[p1]:
+                    fin.append(a[p1])
+                p1+=1
+                p2+=1
+            elif a[p1]>b[p2]:
+                if len(fin)==0 or fin[-1]!=b[p2]:
+                    fin.append(b[p2])
+                p2+=1      
+            else:
+                if len(fin)==0 or fin[-1]!=a[p1]:
+                    fin.append(a[p1])
+                p1+=1
+        while p1<lena:
+            if len(fin)==0 or fin[-1]!=a[p1]:
+                fin.append(a[p1])
+            p1+=1
+        while p2<lenb:
+            if len(fin)==0 or fin[-1]!=b[p2]:
+                fin.append(b[p2])
+            p2+=1
+            
+            
+        return fin
+
+
+
+
