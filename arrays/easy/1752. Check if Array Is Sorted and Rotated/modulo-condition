@@ -1,0 +1,29 @@
+class Solution:
+    def check(self, nums: List[int]) -> bool:
+        count = 0
+        for i in range(len(nums)):
+            if nums[i] > nums[(i+1) % len(nums)]: # best use of the condition
+                count += 1
+        return True if count <= 1 else False
+
+
+Algorithm
+	1.	Initialize count = 0.
+	2.	Traverse the array.
+	3.	Compare each element with the next element (nums[(i+1) % n] handles circular check).
+	4.	If nums[i] > nums[i+1], increment count.
+	5.	If count becomes more than 1, the array cannot be sorted and rotated.
+	6.	Return True if count ≤ 1, else False.
+
+
+Example
+[3,4,5,1,2]
+
+3 > 4  → No
+4 > 5  → No
+5 > 1  → Yes (count = 1)
+1 > 2  → No
+2 > 3  → No
+
+count = 1
+count <= 1 → True
