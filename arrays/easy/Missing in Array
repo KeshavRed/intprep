@@ -1,0 +1,70 @@
+---------------QUESTION--------------------
+You are given an array arr[] of size n - 1 that contains distinct integers in the range from 1 to n (inclusive). This array represents a permutation of the integers from 1 to n with one element missing. Your task is to identify and return the missing element.
+
+Examples:
+
+Input: arr[] = [1, 2, 3, 5]
+Output: 4
+Explanation: All the numbers from 1 to 5 are present except 4.
+Input: arr[] = [8, 2, 4, 5, 3, 7, 1]
+Output: 6
+Explanation: All the numbers from 1 to 8 are present except 6.
+Input: arr[] = [1]
+Output: 2
+Explanation: Only 1 is present so the missing element is 2.
+
+------LINK----------
+https://www.geeksforgeeks.org/problems/missing-number-in-array1416/1
+
+-----------ALGO WITH Example-------------
+Algorithm: Find Missing Number using XOR
+
+Idea:
+Use XOR to cancel out numbers that appear in both the expected range (1 to n)
+and the array. The number that does not cancel out will be the missing number.
+
+Key XOR Properties:
+1) a ^ a = 0
+2) a ^ 0 = a
+3) XOR is associative and commutative (order does not matter)
+
+Steps:
+1. Let n = len(arr) + 1  (since one number is missing).
+2. Initialize ans = 0.
+3. XOR all numbers from 1 to n.
+4. XOR all elements in the array.
+5. Numbers that appear in both places cancel out.
+6. The remaining value in ans is the missing number.
+
+Example:
+
+arr = [1, 2, 4, 5]
+
+Step 1:
+n = len(arr) + 1
+n = 4 + 1 = 5
+
+Step 2: XOR numbers from 1 to n
+
+ans = 0
+ans = 0 ^ 1 = 1
+ans = 1 ^ 2 = 3
+ans = 3 ^ 3 = 0
+ans = 0 ^ 4 = 4
+ans = 4 ^ 5 = 1
+
+Now ans = 1
+
+Step 3: XOR array elements
+
+ans = 1 ^ 1 = 0
+ans = 0 ^ 2 = 2
+ans = 2 ^ 4 = 6
+ans = 6 ^ 5 = 3
+
+Final ans = 3
+
+Missing Number = 3
+
+Time Complexity: O(n)
+Space Complexity: O(1)
