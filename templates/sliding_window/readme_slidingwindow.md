@@ -13,3 +13,10 @@
 -> In that case we tend to find no which are less than equal and no which is greater and then subtract to get the answer becoz we dont know whether to shrink or to expand
 ![Image](./4AB947E0-43F4-4944-A781-599C5454BF8A.png)
 
+
+Most problems here revolve around the 
+-> Generatiing subarrays ( Brute )
+-> Expanding and Shrinking
+-> Generating subarrays
+
+![Image](./14EF8121-5834-4E8C-AE76-CE7D72A8BCB2.png)
