@@ -1,0 +1,42 @@
+---------------QUESTION--------------------
+Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k.
+
+A subarray is a contiguous non-empty sequence of elements within an array.
+
+ 
+
+Example 1:
+
+Input: nums = [1,1,1], k = 2
+Output: 2
+Example 2:
+
+Input: nums = [1,2,3], k = 3
+Output: 2
+
+
+———————LINK———————————
+https://leetcode.com/problems/subarray-sum-equals-k/description/
+
+-----------ALGO WITH Example-------------
+1. Initialize:
+      prefixSum = 0
+      count = 0
+      prefixSumCount = {0:1}
+
+2. Traverse the array.
+
+3. Add current number to prefixSum.
+
+4. Compute:
+      remove = prefixSum - k
+
+5. If remove exists in prefixSumCount:
+      count += prefixSumCount[remove]
+
+6. Store current prefixSum in hashmap:
+      prefixSumCount[prefixSum] += 1
+
+7. Continue until end of array.
+
+8. Return count.
