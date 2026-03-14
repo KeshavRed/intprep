@@ -17,6 +17,10 @@
 Most problems here revolve around the 
 -> Generatiing subarrays ( Brute )
 -> Expanding and Shrinking
--> Generating subarrays
+-> Deciding whetehr we can use for shrink size looking at the max_window or whatever
 
 ![Image](./14EF8121-5834-4E8C-AE76-CE7D72A8BCB2.png)
+
+
+
+Reference video : https://www.youtube.com/watch?v=9kdHxplyl5I&list=PLgUwDviBIf0q7vrFA_HEWcqRqMpCXzYAL
