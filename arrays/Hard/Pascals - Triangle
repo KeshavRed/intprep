@@ -1,0 +1,30 @@
+---------------QUESTION--------------------
+
+
+———————LINK———————————
+https://leetcode.com/problems/pascals-triangle/
+
+-----------ALGO WITH Example-------------
+1. Create an empty list called triangle.
+
+2. For each row r from 1 to numRows:
+      create an empty row list.
+
+3. For each column c from 1 to r:
+
+      Compute value = C(r-1 , c-1)
+
+4. To compute C(n,k):
+
+      result = 1
+      for i from 0 to k-1:
+            result = result * (n - i)
+            result = result // (i + 1)
+
+5. Append the computed value to the row.
+
+6. After filling the row, append it to triangle.
+
+7. Repeat until all rows are generated.
+
+8. Return triangle.
