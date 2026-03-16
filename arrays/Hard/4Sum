@@ -1,0 +1,60 @@
+---------------QUESTION--------------------
+Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
+
+0 <= a, b, c, d < n
+a, b, c, and d are distinct.
+nums[a] + nums[b] + nums[c] + nums[d] == target
+You may return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,0,-1,0,-2,2], target = 0
+Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+Example 2:
+
+Input: nums = [2,2,2,2,2], target = 8
+Output: [[2,2,2,2]]
+
+
+———————LINK———————————
+https://leetcode.com/problems/4sum/description/
+
+-----------ALGO WITH Example-------------
+1. Sort the array.
+
+2. Create an empty list ans to store quadruplets.
+
+3. Loop i from 0 to n-1:
+      Skip duplicate values of nums[i].
+
+4. Loop j from i+1 to n-1:
+      Skip duplicate values of nums[j].
+
+5. Initialize two pointers:
+      k = j + 1
+      l = n - 1
+
+6. While k < l:
+
+      sum = nums[i] + nums[j] + nums[k] + nums[l]
+
+7. If sum == target:
+      Add quadruplet to ans.
+
+      Move both pointers:
+            k += 1
+            l -= 1
+
+      Skip duplicate values of nums[k] and nums[l].
+
+8. If sum < target:
+      Increase k (need larger sum).
+
+9. If sum > target:
+      Decrease l (need smaller sum).
+
+10. Continue until all combinations are checked.
+
+11. Return ans.
