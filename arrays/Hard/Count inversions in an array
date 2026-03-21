@@ -1,0 +1,70 @@
+---------------QUESTION--------------------
+Given an array of integers arr[]. You have to find the Inversion Count of the array. 
+Note : Inversion count is the number of pairs of elements (i, j) such that i < j and arr[i] > arr[j].
+
+Examples:
+
+Input: arr[] = [2, 4, 1, 3, 5]
+Output: 3
+Explanation: The sequence 2, 4, 1, 3, 5 has three inversions (2, 1), (4, 1), (4, 3).
+Input: arr[] = [2, 3, 4, 5, 6]
+Output: 0
+Explanation: As the sequence is already sorted so there is no inversion count.
+Input: arr[] = [10, 10, 10]
+Output: 0
+Explanation: As all the elements of array are same, so there is no inversion count
+
+———————LINK———————————
+https://takeuforward.org/data-structure/count-inversions-in-an-array
+
+-----------ALGO WITH Example-------------
+Algorithm: Count Inversions using Merge Sort
+
+Input: Array arr of size n
+Output: Number of inversions in the array
+
+Step 1: Define function mergeSort(arr, low, high)
+    1.1 If low >= high:
+            return 0
+
+    1.2 Find mid = (low + high) // 2
+
+    1.3 Recursively count inversions in left half:
+            leftCount = mergeSort(arr, low, mid)
+
+    1.4 Recursively count inversions in right half:
+            rightCount = mergeSort(arr, mid + 1, high)
+
+    1.5 Count inversions while merging:
+            mergeCount = merge(arr, low, mid, high)
+
+    1.6 Return total inversions:
+            return leftCount + rightCount + mergeCount
+
+
+Step 2: Define function merge(arr, low, mid, high)
+    2.1 Initialize:
+            temp = empty list
+            left = low
+            right = mid + 1
+            count = 0
+
+    2.2 While left <= mid AND right <= high:
+            If arr[left] <= arr[right]:
+                append arr[left] to temp
+                left += 1
+            Else:
+                append arr[right] to temp
+                count += (mid - left + 1)
+                right += 1
+
+    2.3 Copy remaining elements from left half (if any)
+
+    2.4 Copy remaining elements from right half (if any)
+
+    2.5 Copy temp back into arr[low...high]
+
+    2.6 Return count
+
+
+Step 3: Call mergeSort(arr, 0, n-1)
