@@ -1,0 +1,96 @@
+---------------QUESTION--------------------
+Given an integer array nums, return the number of reverse pairs in the array.
+
+A reverse pair is a pair (i, j) where:
+
+0 <= i < j < nums.length and
+nums[i] > 2 * nums[j].
+ 
+
+Example 1:
+
+Input: nums = [1,3,2,3,1]
+Output: 2
+Explanation: The reverse pairs are:
+(1, 4) --> nums[1] = 3, nums[4] = 1, 3 > 2 * 1
+(3, 4) --> nums[3] = 3, nums[4] = 1, 3 > 2 * 1
+Example 2:
+
+Input: nums = [2,4,3,5,1]
+Output: 3
+Explanation: The reverse pairs are:
+(1, 4) --> nums[1] = 4, nums[4] = 1, 4 > 2 * 1
+(2, 4) --> nums[2] = 3, nums[4] = 1, 3 > 2 * 1
+(3, 4) --> nums[3] = 5, nums[4] = 1, 5 > 2 * 1
+
+———————LINK———————————
+https://leetcode.com/problems/reverse-pairs/description/
+
+-----------ALGO WITH Example-------------
+Problem:
+Count pairs (i, j) such that:
+i < j AND arr[i] > 2 * arr[j]
+
+--------------------------------------------------
+
+Algorithm: mergeSort(arr, low, high)
+
+1. If low >= high:
+       return 0
+
+2. Find mid = (low + high) // 2
+
+3. Recursively count in left half:
+       leftCount = mergeSort(arr, low, mid)
+
+4. Recursively count in right half:
+       rightCount = mergeSort(arr, mid + 1, high)
+
+5. Count reverse pairs across halves:
+       crossCount = countPairs(arr, low, mid, high)
+
+6. Merge the two sorted halves:
+       merge(arr, low, mid, high)
+
+7. Return:
+       leftCount + rightCount + crossCount
+
+--------------------------------------------------
+
+Function: countPairs(arr, low, mid, high)
+
+1. Initialize:
+       right = mid + 1
+       count = 0
+
+2. For i from low to mid:
+       while right <= high AND arr[i] > 2 * arr[right]:
+              right += 1
+
+       count += (right - (mid + 1))
+
+3. Return count
+
+--------------------------------------------------
+
+Function: merge(arr, low, mid, high)
+
+1. Create temp array
+
+2. Initialize:
+       left = low
+       right = mid + 1
+
+3. While left <= mid AND right <= high:
+       If arr[left] <= arr[right]:
+            add arr[left] to temp
+            left++
+       Else:
+            add arr[right] to temp
+            right++
+
+4. Copy remaining elements from left half
+
+5. Copy remaining elements from right half
+
+6. Copy temp back to arr[low...high]
